@@ -19,7 +19,7 @@ class InstagramSpider(scrapy.Spider):
         self.file = file
         self.has_next = True
         if file == '':
-            self.file = "/Users/szeng/Desktop/Projects/Instagram/instagram-caption-generator/users.txt"
+            self.file = input("Name of the file of usernames? ")
         self.counter = 0
         with open(self.file, 'r') as f:
             self.users = f.readlines()
@@ -40,12 +40,8 @@ class InstagramSpider(scrapy.Spider):
     def parse(self, response):
 
         for user in self.users:
-            if self.counter < 100:
-                self.counter += 1
-                user = user.strip('\n')
-                yield scrapy.Request("https://www.instagram.com/"+user+"/?__a=1", callback=self.parse_post)
-            else:
-                break
+            user = user.strip('\n')
+            yield scrapy.Request("https://www.instagram.com/"+user+"/?__a=1", callback=self.parse_post)
 
     def parse_post(self, response):
         graphql = json.loads(response.text)
