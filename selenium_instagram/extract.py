@@ -34,7 +34,7 @@ def main():
             if username not in user_follower_dict:
                 user_follower_dict[username] = follower_count
 
-            print(f"{username}: {follower_count}")
+            #print(f"{username}: {follower_count}")
 
             if user_index % 10:
                 with open("user_follower.pickle", 'wb') as f:
